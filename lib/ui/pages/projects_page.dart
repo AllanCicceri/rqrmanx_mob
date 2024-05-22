@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rqr_manx/domain/navigate_to.dart';
 import 'package:rqr_manx/domain/project_model.dart';
 
 class ProjectsPage extends StatelessWidget {
@@ -7,7 +8,7 @@ class ProjectsPage extends StatelessWidget {
     ProjectModel(
         name: 'Projecto 1',
         startDate: DateTime.now(),
-        finalDate: DateTime.now().add(Duration(days: 30)))
+        finalDate: DateTime.now().add(const Duration(days: 30)))
   ];
   ProjectsPage({super.key});
 
@@ -17,7 +18,7 @@ class ProjectsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('RqrManx  '),
+        title: const Text('RqrManx  '),
       ),
       body: ListView.builder(
         itemCount: itens.length,
@@ -33,7 +34,9 @@ class ProjectsPage extends StatelessWidget {
                 'Fim Previsto: ${formatter.format(itens[index].finalDate)}',
                 style: Theme.of(context).textTheme.bodySmall),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigate.toRequirementsPage(context);
+              },
               icon: const Icon(Icons.keyboard_arrow_right_outlined),
             ),
           );
