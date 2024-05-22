@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rqr_manx/domain/navigate_to.dart';
 import 'package:rqr_manx/domain/project_model.dart';
+import 'package:rqr_manx/ui/components/add_project_button.dart';
+import 'package:rqr_manx/ui/components/form_dialog.dart';
 
 class ProjectsPage extends StatelessWidget {
   final List<ProjectModel> itens = [
@@ -24,9 +26,15 @@ class ProjectsPage extends StatelessWidget {
         itemCount: itens.length,
         itemBuilder: (context, index) {
           return ListTile(
+            onTap: () {
+              Navigate.toRequirementsPage(context);
+            },
+            onLongPress: () {
+              FormDialog.show(context);
+            },
             leading: const Icon(
-              Icons.folder,
-              size: 30,
+              Icons.folder_copy_outlined,
+              size: 25,
             ),
             title: Text(itens[index].name,
                 style: Theme.of(context).textTheme.titleSmall),
@@ -34,14 +42,14 @@ class ProjectsPage extends StatelessWidget {
                 'Fim Previsto: ${formatter.format(itens[index].finalDate)}',
                 style: Theme.of(context).textTheme.bodySmall),
             trailing: IconButton(
-              onPressed: () {
-                Navigate.toRequirementsPage(context);
-              },
-              icon: const Icon(Icons.keyboard_arrow_right_outlined),
+              onPressed: () {},
+              icon: const Icon(Icons.delete),
             ),
           );
         },
       ),
+      floatingActionButton: AddProjectButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

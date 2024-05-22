@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rqr_manx/domain/navigate_to.dart';
 import 'package:rqr_manx/domain/requirements_model.dart';
+import 'package:rqr_manx/ui/components/add_requirement_button.dart';
 
 class RequirementsPage extends StatelessWidget {
   final List<RequirementsModel> itens = [
@@ -25,9 +26,12 @@ class RequirementsPage extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               key: UniqueKey(),
+              onTap: () {
+                Navigate.toRequirementsFormPage(context);
+              },
               leading: Container(
-                width: 20,
-                height: 20,
+                width: 15,
+                height: 15,
                 decoration: BoxDecoration(
                   color: Colors.red, // Cor de fundo da bolinha
                   shape: BoxShape.circle,
@@ -45,13 +49,13 @@ class RequirementsPage extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               trailing: IconButton(
-                onPressed: () {
-                  Navigate.toRequirementsFormPage(context);
-                },
-                icon: const Icon(Icons.keyboard_arrow_right_outlined),
+                onPressed: () {},
+                icon: const Icon(Icons.delete),
               ),
             );
           }),
+      floatingActionButton: AddRequirementButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
