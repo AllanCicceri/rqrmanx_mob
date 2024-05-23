@@ -3,14 +3,16 @@ import 'package:rqr_manx/domain/project_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ProjectsRepository {
-  static insert(ProjectModel model) {
+  static void insert(ProjectModel model) async {
     DatabaseHelper db = DatabaseHelper();
-    db.insert('projects', model.toJson());
+    var data = model.toJson();
+    data.remove('id');
+    await db.insert('projects', data);
   }
 
-  static update(ProjectModel model) {
+  static void update(ProjectModel model) async {
     DatabaseHelper db = DatabaseHelper();
-    db.update('projects', model.toJson(), model.id);
+    await db.update('projects', model.toJson(), model.id);
   }
 
   static delete(int id) {
@@ -20,7 +22,7 @@ class ProjectsRepository {
 
   static Future<List<Map<String, dynamic>>> getAll() async {
     DatabaseHelper db = DatabaseHelper();
-    var projects = db.query('projects');
+    var projects = await db.query('projects');
     return projects;
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rqr_manx/domain/routes.dart';
 import 'package:rqr_manx/ui/pages/projects_page.dart';
 import 'package:rqr_manx/ui/pages/requirements_form_page.dart';
 import 'package:rqr_manx/ui/pages/requirements_page.dart';
@@ -28,7 +27,6 @@ class HomePage extends StatelessWidget {
                   color: Colors.grey[600],
                   fontSize: 13,
                   fontWeight: FontWeight.w300))),
-      home: ProjectsPage(),
       initialRoute: '/projects_page',
       routes: {
         '/projects_page': (context) => ProjectsPage(),

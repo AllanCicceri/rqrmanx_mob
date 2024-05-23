@@ -10,3 +10,4 @@ com.example.rqr_manx.app-rs-8 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\
 com.example.rqr_manx.app-mergeDebugResources-9 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
 com.example.rqr_manx.app-mergeDebugResources-10 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
 com.example.rqr_manx.app-merged_res-11 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\app\intermediates\merged_res\debug
+com.example.rqr_manx.app-packaged_res-12 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\sqflite\intermediates\packaged_res\debug

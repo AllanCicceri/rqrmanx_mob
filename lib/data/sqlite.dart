@@ -22,12 +22,12 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'rqrmanx.db');
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (db, version) async {
         await db.execute(
-            'CREATE TABLE projects (id INTEGER, name VARCHAR, start_date DATETIME, final_date DATETIME)');
+            'CREATE TABLE projects (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, start_date DATETIME, final_date DATETIME)');
         await db.execute(
-            'CREATE TABLE requirements (id INTEGER, name VARCHAR, description VARCHAR, type INTEGER, start_date DATETIME, difficulty INTEGER, priority INTEGER, hours REAL, project_id INTEGER, FOREIGN KEY (project_id) REFERENCES projects(id))');
+            'CREATE TABLE requirements (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, description VARCHAR, type INTEGER, start_date DATETIME, difficulty INTEGER, priority INTEGER, hours REAL, project_id INTEGER, FOREIGN KEY (project_id) REFERENCES projects(id))');
       },
     );
   }

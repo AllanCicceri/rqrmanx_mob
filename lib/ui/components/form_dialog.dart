@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:rqr_manx/data/projects_repository.dart';
+import 'package:rqr_manx/domain/project_model.dart';
 
 class FormDialog {
-  static Future<void> show(BuildContext context) async {
+  static Future<void> show(BuildContext context, ProjectModel? model) async {
     final TextEditingController nameController = TextEditingController();
     final TextEditingController startDateController = TextEditingController();
     final TextEditingController endDateController = TextEditingController();
+
+    if (model != null) {
+      nameController.text = model.name;
+      startDateController.text = model.startDate;
+      endDateController.text = model.finalDate;
+    }
 
     await showDialog(
       context: context,
@@ -63,20 +71,47 @@ class FormDialog {
             ),
             TextButton(
               onPressed: () {
-                // Process the data here
                 String name = nameController.text;
-                String startDate = startDateController.text;
-                String endDate = endDateController.text;
-                print('Name: $name');
-                print('Start Date: $startDate');
-                print('End Date: $endDate');
+                String startDate =
+                    convertDateToSQLiteFormat(startDateController.text);
+                String finalDate =
+                    convertDateToSQLiteFormat(endDateController.text);
+
+                ProjectModel newModel = ProjectModel(
+                    name: name, startDate: startDate, finalDate: finalDate);
+
+                if (model != null) {
+                  newModel.id = model.id;
+                }
+
+                _saveProject(newModel);
+
                 Navigator.of(context).pop();
               },
-              child: Text('Submit'),
+              child: Text('Save'),
             ),
           ],
         );
       },
     );
   }
+}
+
+void _saveProject(ProjectModel model) async {
+  if (model.id == 0) {
+    ProjectsRepository.insert(model);
+  } else {
+    ProjectsRepository.update(model);
+  }
+}
+
+String convertDateToSQLiteFormat(String date) {
+  // Divide a string em dia, mês e ano
+  List<String> parts = date.split('-');
+  String day = parts[0];
+  String month = parts[1];
+  String year = parts[2];
+
+  // Retorna a data no formato 'YYYY-MM-DD'
+  return '$year-$month-$day';
 }
