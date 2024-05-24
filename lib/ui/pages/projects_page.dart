@@ -56,7 +56,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
-              Navigate.toRequirementsPage(context);
+              Navigate.toRequirementsPage(context, itens[index].id.toString());
             },
             onLongPress: () async {
               var editModel = ProjectModel(

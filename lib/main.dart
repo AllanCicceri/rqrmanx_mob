@@ -30,8 +30,21 @@ class HomePage extends StatelessWidget {
       initialRoute: '/projects_page',
       routes: {
         '/projects_page': (context) => ProjectsPage(),
-        '/requirements_page': (context) => RequirementsPage(),
-        '/requirements_form_page': (context) => RequirementsFormPage(),
+        '/requirements_page': (context) => RequirementsPage(
+              projectId: ModalRoute.of(context)!.settings.arguments as String,
+            ),
+        '/requirements_form_page': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map?;
+          final projectId = args?['projectId'] as String?;
+          final requirementId = args?['requirementId'] as String?;
+          final refreshProjects = args?['refreshProjects'];
+
+          return RequirementsFormPage(
+            projectId: int.parse(projectId!),
+            requirementId: int.parse(requirementId!),
+            refreshProjects: refreshProjects,
+          );
+        },
       },
     );
   }

@@ -3,14 +3,16 @@ import 'package:rqr_manx/domain/requirements_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class RequirementsRepository {
-  static insert(RequirementsModel model) {
+  static insert(RequirementsModel model) async {
     DatabaseHelper db = DatabaseHelper();
-    db.insert('requirements', model.toJson());
+    var data = model.toJson();
+    data.remove('id');
+    await db.insert('requirements', data);
   }
 
-  static update(RequirementsModel model) {
+  static update(RequirementsModel model) async {
     DatabaseHelper db = DatabaseHelper();
-    db.update('requirements', model.toJson(), model.id);
+    await db.update('requirements', model.toJson(), model.id);
   }
 
   static delete(int id) {
@@ -18,10 +20,20 @@ class RequirementsRepository {
     db.delete('requirements', id);
   }
 
-  static Future<List<Map<String, dynamic>>> getAll() async {
+  static Future<List<Map<String, dynamic>>> getAll(String projectId) async {
     DatabaseHelper db = DatabaseHelper();
-    var requirements = db.query('requirements');
-    return requirements;
+    Database database = await db.database;
+    List<Map<String, dynamic>> results = await database.query(
+      'requirements',
+      where: 'project_id = ?',
+      whereArgs: [projectId],
+    );
+
+    if (results.isNotEmpty) {
+      return results;
+    } else {
+      return [{}];
+    }
   }
 
   static Future<Map<String, dynamic>> getById(int id, int projectId) async {

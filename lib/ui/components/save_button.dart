@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rqr_manx/data/requirements_repository.dart';
+import 'package:rqr_manx/domain/requirements_model.dart';
 
 class SaveButton extends StatelessWidget {
-  const SaveButton({super.key});
+  final Function() saveRequirement;
+  const SaveButton({super.key, required this.saveRequirement});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +13,7 @@ class SaveButton extends StatelessWidget {
       height: 30,
       child: RawMaterialButton(
         elevation: 5,
-        onPressed: () {},
+        onPressed: () => saveRequirement(),
         fillColor: Colors.red[400],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(3), // Remove o border radius

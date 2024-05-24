@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:rqr_manx/domain/navigate_to.dart';
 
 class AddRequirementButton extends StatelessWidget {
-  const AddRequirementButton({super.key});
+  final String projcetId;
+  final Function refreshProjects;
+  const AddRequirementButton(
+      {super.key, required this.projcetId, required this.refreshProjects});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +14,12 @@ class AddRequirementButton extends StatelessWidget {
       height: 30,
       child: RawMaterialButton(
         elevation: 5,
-        onPressed: () {},
+        onPressed: () {
+          Navigate.toRequirementsFormPage(context,
+              requirementProject: projcetId,
+              requirementId: "0",
+              refreshProjects: refreshProjects);
+        },
         fillColor: Colors.red[400],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(3), // Remove o border radius
