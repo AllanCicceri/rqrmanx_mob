@@ -10,11 +10,12 @@ class RequirementsFormPage extends StatefulWidget {
   final Function refreshProjects;
   final int requirementId;
 
-  RequirementsFormPage(
-      {super.key,
-      this.requirementId = 0,
-      required this.projectId,
-      required this.refreshProjects});
+  RequirementsFormPage({
+    super.key,
+    this.requirementId = 0,
+    required this.projectId,
+    required this.refreshProjects,
+  });
 
   @override
   State<RequirementsFormPage> createState() => _RequirementsFormPageState();
@@ -26,13 +27,42 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
   TextEditingController hoursCtrl = TextEditingController();
   int selectedDifficulty = 0;
   int selectedPriority = 0;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRequirementData();
+  }
+
+  Future<void> _loadRequirementData() async {
+    if (widget.requirementId > 0) {
+      var data = await RequirementsRepository.getById(
+          widget.requirementId, widget.projectId);
+      var model = RequirementsModel.fromJson(data);
+
+      nameCtrl.text = model.name;
+      descriptionCtrl.text = model.description;
+      hoursCtrl.text = model.hours.toString();
+      setState(() {
+        selectedDifficulty = model.difficulty;
+        selectedPriority = model.priority;
+        isLoading = false;
+      });
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   void _saveRequirement(BuildContext context) {
     RequirementsModel model = RequirementsModel(
-        projectId: widget.projectId,
-        name: nameCtrl.text,
-        description: descriptionCtrl.text,
-        hours: double.parse(hoursCtrl.text));
+      projectId: widget.projectId,
+      name: nameCtrl.text,
+      description: descriptionCtrl.text,
+      hours: double.parse(hoursCtrl.text),
+    );
 
     model.difficulty = selectedDifficulty;
     model.priority = selectedPriority;
@@ -49,75 +79,78 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
     widget.refreshProjects();
   }
 
-  @override
-  void initState() {
-    if (widget.requirementId > 0) {
-      RequirementsRepository.getById(widget.requirementId, widget.projectId)
-          .then((data) {
-        var model = RequirementsModel.fromJson(data);
-
-        nameCtrl.text = model.name;
-        descriptionCtrl.text = model.description;
-        hoursCtrl.text = model.hours.toString();
-      });
-    }
-
-    super.initState();
+  void updateDifficulty(int newValue) {
+    setState(() {
+      selectedDifficulty = newValue;
+    });
   }
 
-  void selectedValueDiff(int newValue) {
-    selectedDifficulty = newValue;
-  }
-
-  void selectedValuePrior(int newValue) {
-    selectedPriority = newValue;
+  void updatePriority(int newValue) {
+    setState(() {
+      selectedPriority = newValue;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    CustomDropdown difficultyDropDown = CustomDropdown(
-      label: 'Difficulty Level',
-      items: const [
-        {'value': '0', 'label': 'Low'},
-        {'value': '1', 'label': 'Medium'},
-        {'value': '2', 'label': 'High'},
-      ],
-      selectedValue: selectedValueDiff,
-    );
-
-    CustomDropdown priorityDropDown = CustomDropdown(
-        label: 'Priority Level',
-        items: const [
-          {'value': '0', 'label': 'Low'},
-          {'value': '1', 'label': 'Medium'},
-          {'value': '2', 'label': 'High'},
-        ],
-        selectedValue: selectedValuePrior);
-
-    return Scaffold(
-      appBar: AppBar(title: const Text('RqrManx  ')),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextField(title: 'Name', controller: nameCtrl),
-            CustomTextField(
-                title: 'Description', controller: descriptionCtrl, maxLines: 4),
-            const SizedBox(height: 20),
-            SizedBox(
+    if (isLoading) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('RqrManx')),
+        body: Center(child: CircularProgressIndicator()),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(title: const Text('RqrManx')),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextField(title: 'Name', controller: nameCtrl),
+              CustomTextField(
+                title: 'Description',
+                controller: descriptionCtrl,
+                maxLines: 4,
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
                 width: 100,
-                child: CustomTextField(title: 'Hours', controller: hoursCtrl)),
-            const SizedBox(height: 40),
-            Row(
+                child: CustomTextField(title: 'Hours', controller: hoursCtrl),
+              ),
+              const SizedBox(height: 40),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [difficultyDropDown, priorityDropDown]),
-          ],
+                children: [
+                  CustomDropdown(
+                    label: 'Difficulty Level',
+                    items: const [
+                      {'value': '0', 'label': 'Low'},
+                      {'value': '1', 'label': 'Medium'},
+                      {'value': '2', 'label': 'High'},
+                    ],
+                    selectedValue: updateDifficulty,
+                    selectedItem: selectedDifficulty,
+                  ),
+                  CustomDropdown(
+                    label: 'Priority Level',
+                    items: const [
+                      {'value': '0', 'label': 'Low'},
+                      {'value': '1', 'label': 'Medium'},
+                      {'value': '2', 'label': 'High'},
+                    ],
+                    selectedValue: updatePriority,
+                    selectedItem: selectedPriority,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton:
-          SaveButton(saveRequirement: () => _saveRequirement(context)),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+        floatingActionButton: SaveButton(
+          saveRequirement: () => _saveRequirement(context),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      );
+    }
   }
 }
