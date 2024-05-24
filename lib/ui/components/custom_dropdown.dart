@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomDropdown extends StatefulWidget {
-  final List<String> items;
+  final List<Map<String, String>> items;
   final String label;
+  final Function selectedValue;
 
-  const CustomDropdown({super.key, required this.items, required this.label});
+  CustomDropdown(
+      {super.key,
+      required this.items,
+      required this.label,
+      required this.selectedValue});
 
   @override
   State<CustomDropdown> createState() => _CustomDropdownState();
@@ -17,7 +22,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
   void initState() {
     super.initState();
     _selectedDifficulty =
-        widget.items.first; // Inicializando com a primeira opção
+        widget.items.first['value']!; // Inicializando com a primeira opção
   }
 
   @override
@@ -32,16 +37,19 @@ class _CustomDropdownState extends State<CustomDropdown> {
         DropdownButton(
             value: _selectedDifficulty,
             elevation: 10,
-            items: widget.items.map<DropdownMenuItem<String>>((String value) {
+            items: widget.items
+                .map<DropdownMenuItem<String>>((Map<String, String> item) {
               return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value, style: TextStyle(color: Colors.grey[600])),
+                value: item['value'],
+                child: Text(item['label'] ?? '',
+                    style: TextStyle(color: Colors.grey[600])),
               );
             }).toList(),
             onChanged: (newValue) {
               setState(() {
                 _selectedDifficulty = newValue!;
               });
+              widget.selectedValue(int.parse(newValue!));
             }),
       ],
     );

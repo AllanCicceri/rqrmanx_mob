@@ -22,10 +22,10 @@ class RequirementsFormPage extends StatefulWidget {
 
 class _RequirementsFormPageState extends State<RequirementsFormPage> {
   TextEditingController nameCtrl = TextEditingController();
-
   TextEditingController descriptionCtrl = TextEditingController();
-
   TextEditingController hoursCtrl = TextEditingController();
+  int selectedDifficulty = 0;
+  int selectedPriority = 0;
 
   void _saveRequirement(BuildContext context) {
     RequirementsModel model = RequirementsModel(
@@ -34,8 +34,8 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
         description: descriptionCtrl.text,
         hours: double.parse(hoursCtrl.text));
 
-    model.difficulty = 0;
-    model.priority = 0;
+    model.difficulty = selectedDifficulty;
+    model.priority = selectedPriority;
     model.type = 0;
     model.id = widget.requirementId;
 
@@ -65,8 +65,35 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
     super.initState();
   }
 
+  void selectedValueDiff(int newValue) {
+    selectedDifficulty = newValue;
+  }
+
+  void selectedValuePrior(int newValue) {
+    selectedPriority = newValue;
+  }
+
   @override
   Widget build(BuildContext context) {
+    CustomDropdown difficultyDropDown = CustomDropdown(
+      label: 'Difficulty Level',
+      items: const [
+        {'value': '0', 'label': 'Low'},
+        {'value': '1', 'label': 'Medium'},
+        {'value': '2', 'label': 'High'},
+      ],
+      selectedValue: selectedValueDiff,
+    );
+
+    CustomDropdown priorityDropDown = CustomDropdown(
+        label: 'Priority Level',
+        items: const [
+          {'value': '0', 'label': 'Low'},
+          {'value': '1', 'label': 'Medium'},
+          {'value': '2', 'label': 'High'},
+        ],
+        selectedValue: selectedValuePrior);
+
     return Scaffold(
       appBar: AppBar(title: const Text('RqrManx  ')),
       body: Padding(
@@ -82,16 +109,9 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
                 width: 100,
                 child: CustomTextField(title: 'Hours', controller: hoursCtrl)),
             const SizedBox(height: 40),
-            const Row(
+            Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomDropdown(
-                      label: 'Difficulty Level',
-                      items: ['low', 'medium', 'high']),
-                  CustomDropdown(
-                      label: 'Priority Level',
-                      items: ['low', 'medium', 'high']),
-                ]),
+                children: [difficultyDropDown, priorityDropDown]),
           ],
         ),
       ),
