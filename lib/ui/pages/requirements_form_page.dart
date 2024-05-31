@@ -44,6 +44,11 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
   }
 
   Future<void> _openCamera() async {
+    if (image1 != null && image2 != null) {
+      image1 = null;
+      image2 = null;
+    }
+
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.camera);
 
@@ -78,6 +83,9 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
       setState(() {
         selectedDifficulty = model.difficulty;
         selectedPriority = model.priority;
+        location = model.geolocation;
+        image1 = model.image1;
+        image2 = model.image2;
         isLoading = false;
       });
     } else {
@@ -99,6 +107,9 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
     model.priority = selectedPriority;
     model.type = 0;
     model.id = widget.requirementId;
+    model.geolocation = location;
+    model.image1 = image1;
+    model.image2 = image2;
 
     if (model.id == 0) {
       RequirementsRepository.insert(model);

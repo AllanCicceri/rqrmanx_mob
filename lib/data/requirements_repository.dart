@@ -7,12 +7,26 @@ class RequirementsRepository {
     DatabaseHelper db = DatabaseHelper();
     var data = model.toJson();
     data.remove('id');
+    if (model.image1 != null) {
+      data['image1'] = model.image1!.readAsBytesSync();
+    }
+    if (model.image2 != null) {
+      data['image2'] = model.image2!.readAsBytesSync();
+    }
     await db.insert('requirements', data);
   }
 
   static update(RequirementsModel model) async {
     DatabaseHelper db = DatabaseHelper();
-    await db.update('requirements', model.toJson(), model.id);
+
+    var data = model.toJson();
+    if (model.image1 != null) {
+      data['image1'] = model.image1!.readAsBytesSync();
+    }
+    if (model.image2 != null) {
+      data['image2'] = model.image2!.readAsBytesSync();
+    }
+    await db.update('requirements', data, model.id);
   }
 
   static delete(int id) {
