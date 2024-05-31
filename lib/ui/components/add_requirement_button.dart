@@ -10,8 +10,8 @@ class AddRequirementButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 80,
-      height: 30,
+      width: 100,
+      height: 40,
       child: RawMaterialButton(
         elevation: 5,
         onPressed: () {

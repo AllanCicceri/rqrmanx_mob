@@ -19,4 +19,12 @@ class Navigate {
       },
     );
   }
+
+  static void toHomePage(BuildContext context) {
+    Navigator.pushReplacementNamed(context, '/home_page');
+  }
+
+  static void toProjectsPage(BuildContext context) {
+    Navigator.pushNamed(context, '/projects_page');
+  }
 }

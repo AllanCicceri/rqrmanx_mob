@@ -35,6 +35,20 @@ class RequirementsModel {
   }
 
   factory RequirementsModel.fromJson(Map<String, dynamic> json) {
+    if (json == null || json.isEmpty) {
+      // Retorna um JSON vazio
+      return RequirementsModel(
+        id: 0,
+        projectId: 0,
+        name: '',
+        description: '',
+        type: 0,
+        priority: 0,
+        difficulty: 0,
+        hours: 0,
+      );
+    }
+
     var model = RequirementsModel(
       id: json['id'] ?? 0,
       projectId: json['project_id'] ?? 0,
@@ -45,8 +59,6 @@ class RequirementsModel {
       difficulty: json['difficulty'] ?? 0,
       hours: json['hours'] ?? 0,
     );
-
-    model.startDate = json['start_date'];
 
     return model;
   }

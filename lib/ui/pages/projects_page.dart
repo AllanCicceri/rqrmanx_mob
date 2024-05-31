@@ -48,9 +48,6 @@ class _ProjectsPageState extends State<ProjectsPage> {
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('RqrManx  '),
-      ),
       body: ListView.builder(
         itemCount: itens.length,
         itemBuilder: (context, index) {

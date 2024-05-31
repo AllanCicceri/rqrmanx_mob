@@ -18,69 +18,79 @@ class _RequirementsPageState extends State<RequirementsPage> {
   @override
   void initState() {
     super.initState();
+    _loadRequirements();
+  }
 
+  void _loadRequirements() {
     RequirementsRepository.getAll(widget.projectId).then((data) {
-      var list = data.map((json) => RequirementsModel.fromJson(json)).toList();
-      setState(() {
-        itens = list;
-      });
+      if (data.isNotEmpty) {
+        var list =
+            data.map((json) => RequirementsModel.fromJson(json)).toList();
+        setState(() {
+          itens = list;
+        });
+      }
+    });
+  }
+
+  Future<void> _deleteRequirement(int index) async {
+    await RequirementsRepository.delete(itens[index].id);
+    setState(() {
+      itens.removeAt(index);
     });
   }
 
   void refreshProjects() {
-    RequirementsRepository.getAll(widget.projectId).then((data) {
-      var list = data.map((json) => RequirementsModel.fromJson(json)).toList();
-      setState(() {
-        itens = list;
-      });
-    });
+    _loadRequirements();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RqrManx  '),
+        title: const Text('RqrManx'),
       ),
       body: ListView.builder(
-          itemCount: itens.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              key: UniqueKey(),
-              onTap: () {
-                Navigate.toRequirementsFormPage(context,
-                    requirementProject: widget.projectId,
-                    requirementId: itens[index].id.toString(),
-                    refreshProjects: refreshProjects);
+        itemCount: itens.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            key: ValueKey(itens[index].id),
+            onTap: () {
+              Navigate.toRequirementsFormPage(
+                context,
+                requirementProject: widget.projectId,
+                requirementId: itens[index].id.toString(),
+                refreshProjects: refreshProjects,
+              );
+            },
+            leading: Container(
+              width: 15,
+              height: 15,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.grey[600]!, width: 2),
+              ),
+            ),
+            title: Text(
+              itens[index].name,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            subtitle: Text(
+              itens[index].description,
+              style: Theme.of(context).textTheme.bodySmall,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            trailing: IconButton(
+              onPressed: () {
+                _deleteRequirement(index);
               },
-              leading: Container(
-                width: 15,
-                height: 15,
-                decoration: BoxDecoration(
-                  color: Colors.red, // Cor de fundo da bolinha
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.grey[600]!, width: 2),
-                ),
-              ),
-              title: Text(
-                itens[index].name,
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              subtitle: Text(
-                itens[index].description,
-                style: Theme.of(context).textTheme.bodySmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              trailing: IconButton(
-                onPressed: () {
-                  RequirementsRepository.delete(itens[index].id);
-                  refreshProjects();
-                },
-                icon: const Icon(Icons.delete),
-              ),
-            );
-          }),
+              icon: const Icon(Icons.delete),
+            ),
+          );
+        },
+      ),
       floatingActionButton: AddRequirementButton(
         projcetId: widget.projectId,
         refreshProjects: refreshProjects,

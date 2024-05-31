@@ -32,7 +32,7 @@ class RequirementsRepository {
     if (results.isNotEmpty) {
       return results;
     } else {
-      return [{}];
+      return [];
     }
   }
 
