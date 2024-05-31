@@ -19,15 +19,15 @@ class GeolocationService {
     return true;
   }
 
-  Future<Position?> getCurrentLocation() async {
+  Future<String> getCurrentLocation() async {
     final hasPermission = await _handleLocationPermission();
 
     if (!hasPermission) {
-      return null;
+      return "";
     }
 
-    return await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-    );
+    var location = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    return 'Longitude: ${location.longitude.toString()} \nLatitude: ${location.latitude.toString()} \nAltitude: ${location.altitude.toString()}';
   }
 }

@@ -1,5 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rqr_manx/data/requirements_repository.dart';
 import 'package:rqr_manx/domain/requirements_model.dart';
 import 'package:rqr_manx/services/geolocation_service.dart';
@@ -12,7 +13,7 @@ class RequirementsFormPage extends StatefulWidget {
   final Function refreshProjects;
   final int requirementId;
 
-  RequirementsFormPage({
+  const RequirementsFormPage({
     super.key,
     this.requirementId = 0,
     required this.projectId,
@@ -30,23 +31,31 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
   int selectedDifficulty = 0;
   int selectedPriority = 0;
   bool isLoading = true;
-  Position? location = Position(
-      longitude: 0,
-      latitude: 0,
-      timestamp: DateTime.now(),
-      accuracy: 0,
-      altitude: 0,
-      altitudeAccuracy: 0,
-      heading: 0,
-      headingAccuracy: 0,
-      speed: 0,
-      speedAccuracy: 0);
+  String location = "";
+
+  File? image1;
+  File? image2;
 
   @override
   void initState() {
     super.initState();
     _loadRequirementData();
     _loadLocation();
+  }
+
+  Future<void> _openCamera() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        if (image1 == null) {
+          image1 = File(pickedFile.path);
+        } else {
+          image2 = File(pickedFile.path);
+        }
+      }
+    });
   }
 
   Future<void> _loadLocation() async {
@@ -118,7 +127,7 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
     if (isLoading) {
       return Scaffold(
         appBar: AppBar(title: const Text('RqrManx')),
-        body: Center(child: CircularProgressIndicator()),
+        body: const Center(child: CircularProgressIndicator()),
       );
     } else {
       return Scaffold(
@@ -171,9 +180,29 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                        'Location: \nLongitude: ${location!.longitude.toString()} \nLatitude: ${location!.latitude.toString()} \nAltitude: ${location!.altitude.toString()}'),
-                    ElevatedButton(onPressed: () {}, child: Text('Camera'))
+                    Text(location),
+                    ElevatedButton(
+                        onPressed: _openCamera, child: const Text('Camera'))
+                  ],
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    image1 == null
+                        ? const SizedBox()
+                        : SizedBox(
+                            width: 150,
+                            height: 150,
+                            child: Image.file(image1!, fit: BoxFit.cover)),
+                    image2 == null
+                        ? const SizedBox()
+                        : SizedBox(
+                            width: 150,
+                            height: 150,
+                            child: Image.file(image2!, fit: BoxFit.cover))
                   ],
                 ),
               ],
