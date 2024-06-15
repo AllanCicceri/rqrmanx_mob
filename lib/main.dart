@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rqr_manx/ui/pages/home_page.dart';
 import 'package:rqr_manx/ui/pages/login_page.dart';
+import 'package:rqr_manx/ui/pages/main_page.dart';
 import 'package:rqr_manx/ui/pages/projects_page.dart';
 import 'package:rqr_manx/ui/pages/requirements_form_page.dart';
 import 'package:rqr_manx/ui/pages/requirements_page.dart';
@@ -57,6 +58,8 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/login_page',
       routes: {
         '/login_page': (context) => LoginPage(),
+        '/main_page': (context) => MainPage(),
+        '/home_page': (context) => HomePage(),
         '/requirements_page': (context) => RequirementsPage(
               projectId: ModalRoute.of(context)!.settings.arguments as String,
             ),
@@ -101,16 +104,16 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+// class HomePage extends StatelessWidget {
+//   const HomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Home Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Text(
+//         'Home Page',
+//         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+//       ),
+//     );
+//   }
+// }

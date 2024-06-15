@@ -24,6 +24,10 @@ class Navigate {
     Navigator.pushReplacementNamed(context, '/home_page');
   }
 
+  static void toMainPage(BuildContext context) {
+    Navigator.pushReplacementNamed(context, '/main_page');
+  }
+
   static void toProjectsPage(BuildContext context) {
     Navigator.pushNamed(context, '/projects_page');
   }

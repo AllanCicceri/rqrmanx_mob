@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rqr_manx/data/users_repository.dart';
+import 'package:rqr_manx/domain/navigate_to.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -11,11 +13,14 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void onLogin() {
+  void onLogin() async {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
-    print('Username: $username, Password: $password');
+    String name = await UsersRepository.getByNameAndPass(username, password);
+    if (name.isNotEmpty) {
+      Navigate.toMainPage(context);
+    }
   }
 
   @override
