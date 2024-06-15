@@ -1,0 +1,14 @@
+com.baseflow.geolocator.geolocator_android-core-1.6.0-0 C:\Users\Allan\.gradle\caches\transforms-3\284a410c767ad6c7a2b0ffc8d8d85981\transformed\core-1.6.0\res
+com.baseflow.geolocator.geolocator_android-jetified-window-java-1.0.0-beta04-1 C:\Users\Allan\.gradle\caches\transforms-3\2a215381204751055df81b6269e717b7\transformed\jetified-window-java-1.0.0-beta04\res
+com.baseflow.geolocator.geolocator_android-jetified-play-services-basement-17.0.0-2 C:\Users\Allan\.gradle\caches\transforms-3\311e1a3df675e87bce9eb256760ed271\transformed\jetified-play-services-basement-17.0.0\res
+com.baseflow.geolocator.geolocator_android-jetified-annotation-experimental-1.1.0-3 C:\Users\Allan\.gradle\caches\transforms-3\3d2f03fc996c2e0aa3dee5cfa3002cd1\transformed\jetified-annotation-experimental-1.1.0\res
+com.baseflow.geolocator.geolocator_android-jetified-play-services-base-17.0.0-4 C:\Users\Allan\.gradle\caches\transforms-3\dc056d1cf6c2858cc038487ea1d537f0\transformed\jetified-play-services-base-17.0.0\res
+com.baseflow.geolocator.geolocator_android-jetified-window-1.0.0-beta04-5 C:\Users\Allan\.gradle\caches\transforms-3\f302e75fb7efd781bcf1a29281c188da\transformed\jetified-window-1.0.0-beta04\res
+com.baseflow.geolocator.geolocator_android-main-6 C:\Users\Allan\AppData\Local\Pub\Cache\hosted\pub.dev\geolocator_android-3.2.1\android\src\main\res
+com.baseflow.geolocator.geolocator_android-release-7 C:\Users\Allan\AppData\Local\Pub\Cache\hosted\pub.dev\geolocator_android-3.2.1\android\src\release\res
+com.baseflow.geolocator.geolocator_android-pngs-8 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\geolocator_android\generated\res\pngs\release
+com.baseflow.geolocator.geolocator_android-resValues-9 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\geolocator_android\generated\res\resValues\release
+com.baseflow.geolocator.geolocator_android-rs-10 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\geolocator_android\generated\res\rs\release
+com.baseflow.geolocator.geolocator_android-mergeReleaseResources-11 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\geolocator_android\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.baseflow.geolocator.geolocator_android-mergeReleaseResources-12 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\geolocator_android\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.baseflow.geolocator.geolocator_android-merged_res-13 C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\build\geolocator_android\intermediates\merged_res\release

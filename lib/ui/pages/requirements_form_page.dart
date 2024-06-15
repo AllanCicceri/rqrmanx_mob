@@ -66,9 +66,11 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
   Future<void> _loadLocation() async {
     GeolocationService geoService = GeolocationService();
     var geolocation = await geoService.getCurrentLocation();
-    setState(() {
-      location = geolocation;
-    });
+    if (mounted) {
+      setState(() {
+        location = geolocation;
+      });
+    }
   }
 
   Future<void> _loadRequirementData() async {
