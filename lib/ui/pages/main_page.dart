@@ -42,11 +42,11 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.app_registration),
-            label: 'Cadastros',
+            label: 'Projects',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Usuários',
+            label: 'Users',
           ),
         ],
         currentIndex: _selectedIndex,
