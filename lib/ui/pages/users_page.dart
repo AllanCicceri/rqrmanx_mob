@@ -16,7 +16,10 @@ class _UsersPageState extends State<UsersPage> {
   @override
   void initState() {
     super.initState();
+    _carregaDados();
+  }
 
+  void _carregaDados() {
     UsersRepository.getAll().then((value) => {
           setState(() {
             userList = value;
@@ -26,6 +29,7 @@ class _UsersPageState extends State<UsersPage> {
 
   void _onClick(BuildContext context) async {
     await UserFormDialog.show(context);
+    _carregaDados();
   }
 
   @override
