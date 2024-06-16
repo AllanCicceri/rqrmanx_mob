@@ -13,8 +13,8 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\debug\AndroidManifest.xml:6:5-66
-15-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\debug\AndroidManifest.xml:6:22-64
+15-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:7:5-66
+15-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:7:22-64
 16    <uses-permission android:name="android.permission.CAMERA" />
 16-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:2:5-64
 16-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:2:22-62
@@ -38,16 +38,16 @@
 26         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
 27    -->
 28    <queries>
-28-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:45:5-50:15
+28-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:46:5-51:15
 29        <intent>
-29-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:46:9-49:18
+29-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:47:9-50:18
 30            <action android:name="android.intent.action.PROCESS_TEXT" />
-30-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:47:13-72
-30-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:47:21-70
+30-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:48:13-72
+30-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:48:21-70
 31
 32            <data android:mimeType="text/plain" />
-32-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:48:13-50
-32-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:48:19-48
+32-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:49:13-50
+32-->C:\Users\Allan\Documents\dev\univates\rqrmanx_mob\android\app\src\main\AndroidManifest.xml:49:19-48
 33        </intent>
 34    </queries>
 35

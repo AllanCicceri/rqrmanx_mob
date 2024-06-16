@@ -4,6 +4,7 @@ import 'package:rqr_manx/data/projects_repository.dart';
 import 'package:rqr_manx/domain/navigate_to.dart';
 import 'package:rqr_manx/domain/project_model.dart';
 import 'package:rqr_manx/ui/components/add_project_button.dart';
+import 'package:rqr_manx/ui/components/custom_webview.dart';
 import 'package:rqr_manx/ui/components/form_dialog.dart';
 
 class ProjectsPage extends StatefulWidget {
@@ -59,7 +60,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
               var editModel = ProjectModel(
                   name: itens[index].name,
                   startDate: itens[index].startDate,
-                  finalDate: itens[index].finalDate);
+                  finalDate: itens[index].finalDate,
+                  link: itens[index].link);
               editModel.id = itens[index].id;
               await FormDialog.show(context, editModel);
               getProjects();
@@ -68,8 +70,21 @@ class _ProjectsPageState extends State<ProjectsPage> {
               Icons.folder_copy_outlined,
               size: 25,
             ),
-            title: Text(itens[index].name,
-                style: Theme.of(context).textTheme.titleSmall),
+            title: Row(
+              children: [
+                Text(itens[index].name,
+                    style: Theme.of(context).textTheme.titleSmall),
+                IconButton(
+                    onPressed: () {
+                      Navigate.toCustomWebView(context, itens[index].link);
+                    },
+                    icon: Icon(
+                      Icons.open_in_new,
+                      size: 20,
+                      color: Colors.grey[600],
+                    ))
+              ],
+            ),
             subtitle: Text('Fim Previsto: ${itens[index].finalDate}',
                 style: Theme.of(context).textTheme.bodySmall),
             trailing: IconButton(

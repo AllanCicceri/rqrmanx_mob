@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rqr_manx/ui/components/custom_webview.dart';
 import 'package:rqr_manx/ui/pages/home_page.dart';
 import 'package:rqr_manx/ui/pages/login_page.dart';
 import 'package:rqr_manx/ui/pages/main_page.dart';
@@ -44,6 +45,9 @@ class _MyAppState extends State<MyApp> {
         ),
         initialRoute: '/login_page',
         routes: {
+          '/webview_page': (context) => CustomWebview(
+                url: ModalRoute.of(context)!.settings.arguments as String,
+              ),
           '/login_page': (context) => LoginPage(),
           '/main_page': (context) => MainPage(),
           '/home_page': (context) => HomePage(),

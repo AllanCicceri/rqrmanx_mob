@@ -7,11 +7,13 @@ class FormDialog {
     final TextEditingController nameController = TextEditingController();
     final TextEditingController startDateController = TextEditingController();
     final TextEditingController endDateController = TextEditingController();
+    final TextEditingController linkController = TextEditingController();
 
     if (model != null) {
       nameController.text = model.name;
       startDateController.text = model.startDate;
       endDateController.text = model.finalDate;
+      linkController.text = model.link;
     }
 
     await showDialog(
@@ -60,6 +62,10 @@ class FormDialog {
                   }
                 },
               ),
+              TextFormField(
+                controller: linkController,
+                decoration: InputDecoration(labelText: 'link'),
+              ),
             ],
           ),
           actions: [
@@ -76,9 +82,13 @@ class FormDialog {
                     convertDateToSQLiteFormat(startDateController.text);
                 String finalDate =
                     convertDateToSQLiteFormat(endDateController.text);
+                String link = linkController.text;
 
                 ProjectModel newModel = ProjectModel(
-                    name: name, startDate: startDate, finalDate: finalDate);
+                    name: name,
+                    startDate: startDate,
+                    finalDate: finalDate,
+                    link: link);
 
                 if (model != null) {
                   newModel.id = model.id;

@@ -3,12 +3,14 @@ class ProjectModel {
   String name;
   String startDate;
   String finalDate;
+  String link;
 
   ProjectModel(
       {this.id = 0,
       required this.name,
       required this.startDate,
-      required this.finalDate});
+      required this.finalDate,
+      this.link = ""});
 
   Map<String, dynamic> toJson() {
     return {
@@ -16,6 +18,7 @@ class ProjectModel {
       'name': name,
       'start_date': startDate,
       'final_date': finalDate,
+      'link': link
     };
   }
 
@@ -25,6 +28,7 @@ class ProjectModel {
       name: json['name'] ?? '',
       startDate: json['start_date'] ?? '',
       finalDate: json['final_date'] ?? '',
+      link: json['link'] ?? '',
     );
   }
 }

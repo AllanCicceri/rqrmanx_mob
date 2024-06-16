@@ -20,6 +20,10 @@ class Navigate {
     );
   }
 
+  static void toCustomWebView(BuildContext context, String url) {
+    Navigator.pushNamed(context, '/webview_page', arguments: url);
+  }
+
   static void toHomePage(BuildContext context) {
     Navigator.pushReplacementNamed(context, '/home_page');
   }
