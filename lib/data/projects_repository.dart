@@ -41,4 +41,9 @@ class ProjectsRepository {
       return {};
     }
   }
+
+  static Future<int> count() async {
+    List<Map<String, dynamic>> projects = await ProjectsRepository.getAll();
+    return projects.length;
+  }
 }

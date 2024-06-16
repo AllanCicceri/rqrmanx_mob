@@ -65,4 +65,11 @@ class RequirementsRepository {
       return {};
     }
   }
+
+  static Future<int> count() async {
+    DatabaseHelper db = DatabaseHelper();
+    Database database = await db.database;
+    List<Map<String, dynamic>> results = await database.query('requirements');
+    return results.length;
+  }
 }

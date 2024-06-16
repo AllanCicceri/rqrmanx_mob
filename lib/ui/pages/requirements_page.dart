@@ -67,7 +67,7 @@ class _RequirementsPageState extends State<RequirementsPage> {
               width: 15,
               height: 15,
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: itens[index].type == 0 ? Colors.red : Colors.green,
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.grey[600]!, width: 2),
               ),

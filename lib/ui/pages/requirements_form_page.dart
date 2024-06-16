@@ -32,6 +32,7 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
   int selectedPriority = 0;
   bool isLoading = true;
   String location = "";
+  bool isFunctional = false;
 
   File? image1;
   File? image2;
@@ -89,6 +90,7 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
         image1 = model.image1;
         image2 = model.image2;
         isLoading = false;
+        isFunctional = model.type == 1 ? true : false;
       });
     } else {
       setState(() {
@@ -107,7 +109,7 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
 
     model.difficulty = selectedDifficulty;
     model.priority = selectedPriority;
-    model.type = 0;
+    model.type = isFunctional ? 1 : 0;
     model.id = widget.requirementId;
     model.geolocation = location;
     model.image1 = image1;
@@ -158,9 +160,31 @@ class _RequirementsFormPageState extends State<RequirementsFormPage> {
                   maxLines: 4,
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  width: 100,
-                  child: CustomTextField(title: 'Hours', controller: hoursCtrl),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: CustomTextField(
+                          title: 'Hours', controller: hoursCtrl),
+                    ),
+                    Row(
+                      children: [
+                        const Text('RNF', style: TextStyle(fontSize: 16)),
+                        Switch(
+                          activeColor: Colors.green,
+                          inactiveThumbColor: Colors.red,
+                          value: isFunctional,
+                          onChanged: (newValue) {
+                            setState(() {
+                              isFunctional = newValue;
+                            });
+                          },
+                        ),
+                        const Text('RF', style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 40),
                 Row(
