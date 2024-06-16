@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.rqr_manx.app-mergeReleaseResources-22:/values-eu/values-eu.xml",
+            "outputFile": "com.example.rqr_manx.app-mergeReleaseResources-23:/values-eu/values-eu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Allan\\.gradle\\caches\\transforms-3\\dc056d1cf6c2858cc038487ea1d537f0\\transformed\\jetified-play-services-base-17.0.0\\res\\values-eu\\values.xml",

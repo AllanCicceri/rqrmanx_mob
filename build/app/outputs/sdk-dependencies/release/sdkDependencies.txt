@@ -567,6 +567,18 @@ library {
 }
 library {
   maven_library {
+    groupId: "androidx.webkit"
+    artifactId: "webkit"
+    version: "1.11.0"
+  }
+  digests {
+    sha256: "H\001\257X\257\355\177\177\210\365\240!m?\214\257\260\004sG^\272D\227NH\371W\027\235\321\020"
+  }
+  repo_index {
+  }
+}
+library {
+  maven_library {
     groupId: "io.flutter"
     artifactId: "armeabi_v7a_release"
     version: "1.0.0-f6344b75dcf861d8bf1f1322780b8811f982e31a"
@@ -606,7 +618,7 @@ library {
 }
 library {
   digests {
-    sha256: "w\232\n=$>Z\246_;g\273t\300\321\207\v3t\357\267g\030C|\277\352\214A\t\021\251"
+    sha256: "\205#\317\233\v_\354\260k\377\337\300\203\307/\"$\022\247ky\v?\027\227\273>\363#\323\247\360"
   }
 }
 library_dependencies {
@@ -922,12 +934,17 @@ library_dependencies {
   library_dep_index: 3
   library_dep_index: 12
 }
+library_dependencies {
+  library_index: 47
+  library_dep_index: 0
+  library_dep_index: 27
+}
 module_dependencies {
   module_name: "base"
   dependency_index: 11
-  dependency_index: 47
   dependency_index: 48
   dependency_index: 49
+  dependency_index: 50
   dependency_index: 0
   dependency_index: 5
   dependency_index: 40
@@ -935,7 +952,8 @@ module_dependencies {
   dependency_index: 45
   dependency_index: 37
   dependency_index: 46
-  dependency_index: 50
+  dependency_index: 47
+  dependency_index: 51
 }
 repositories {
   maven_repo {
@@ -950,6 +968,16 @@ repositories {
 repositories {
   maven_repo {
     url: "https://storage.googleapis.com/download.flutter.io"
+  }
+}
+repositories {
+  maven_repo {
+    url: "https://dl.google.com/dl/android/maven2/"
+  }
+}
+repositories {
+  maven_repo {
+    url: "https://repo.maven.apache.org/maven2/"
   }
 }
 repositories {

@@ -11,8 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late int countProjects;
-  late int countRequirements;
+  int countProjects = 0;
+  int countRequirements = 0;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'You have $countProjects ${countProjects > 1 ? 'projects' : 'project'} \nAnd $countRequirements ${countRequirements > 1 ? 'Requirements' : 'Requirement'}',
+        'Welcome back... \nYou have $countProjects ${countProjects > 1 ? 'projects' : 'project'} \nAnd $countRequirements ${countRequirements > 1 ? 'Requirements' : 'Requirement'}',
         style: Theme.of(context).textTheme.titleLarge,
       ),
     );
