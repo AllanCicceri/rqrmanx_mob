@@ -4,6 +4,8 @@ import 'package:rqr_manx/ui/pages/projects_page.dart';
 import 'package:rqr_manx/ui/pages/users_page.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -11,9 +13,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    HomePage(), // Sua página inicial
+    const HomePage(), // Sua página inicial
     ProjectsPage(), // Sua página de projetos
-    UsersPage(),
+    const UsersPage(),
   ];
 
   void _onItemTapped(int index) {

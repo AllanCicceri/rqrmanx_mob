@@ -25,7 +25,11 @@ class Navigate {
   }
 
   static void toMainPage(BuildContext context) {
-    Navigator.pushReplacementNamed(context, '/main_page');
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/main_page',
+      (Route<dynamic> route) => false,
+    );
   }
 
   static void toProjectsPage(BuildContext context) {

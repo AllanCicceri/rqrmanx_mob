@@ -18,102 +18,51 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
-
-  static List<Widget> _pages = <Widget>[
-    HomePage(),
-    ProjectsPage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.grey[600],
-          titleTextStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-        textTheme: TextTheme(
-          titleSmall: TextStyle(
-            color: Colors.grey[600],
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-          bodySmall: TextStyle(
-            color: Colors.grey[600],
-            fontSize: 13,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
-      ),
-      initialRoute: '/login_page',
-      routes: {
-        '/login_page': (context) => LoginPage(),
-        '/main_page': (context) => MainPage(),
-        '/home_page': (context) => HomePage(),
-        '/requirements_page': (context) => RequirementsPage(
-              projectId: ModalRoute.of(context)!.settings.arguments as String,
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.grey[600],
+            titleTextStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
-        '/requirements_form_page': (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as Map?;
-          final projectId = args?['projectId'] as String?;
-          final requirementId = args?['requirementId'] as String?;
-          final refreshProjects = args?['refreshProjects'];
+          ),
+          textTheme: TextTheme(
+            titleSmall: TextStyle(
+              color: Colors.grey[600],
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            bodySmall: TextStyle(
+              color: Colors.grey[600],
+              fontSize: 13,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+        ),
+        initialRoute: '/login_page',
+        routes: {
+          '/login_page': (context) => LoginPage(),
+          '/main_page': (context) => MainPage(),
+          '/home_page': (context) => HomePage(),
+          '/requirements_page': (context) => RequirementsPage(
+                projectId: ModalRoute.of(context)!.settings.arguments as String,
+              ),
+          '/requirements_form_page': (context) {
+            final args = ModalRoute.of(context)!.settings.arguments as Map?;
+            final projectId = args?['projectId'] as String?;
+            final requirementId = args?['requirementId'] as String?;
+            final refreshProjects = args?['refreshProjects'];
 
-          return RequirementsFormPage(
-            projectId: int.parse(projectId!),
-            requirementId: int.parse(requirementId!),
-            refreshProjects: refreshProjects,
-          );
+            return RequirementsFormPage(
+              projectId: int.parse(projectId!),
+              requirementId: int.parse(requirementId!),
+              refreshProjects: refreshProjects,
+            );
+          },
         },
-      },
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('RqrManx'),
-        ),
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: _pages,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.app_registration),
-              label: 'Cadastros',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue,
-          onTap: _onItemTapped,
-        ),
-      ),
-    );
+        home: MainPage());
   }
 }
-
-// class HomePage extends StatelessWidget {
-//   const HomePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Text(
-//         'Home Page',
-//         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-//       ),
-//     );
-//   }
-// }

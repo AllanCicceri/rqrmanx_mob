@@ -12,6 +12,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _usernameFocusNode = FocusNode();
+  bool _textErrorLoginVisible = false;
 
   void onLogin() async {
     String username = _usernameController.text;
@@ -20,6 +22,11 @@ class _LoginPageState extends State<LoginPage> {
     String name = await UsersRepository.getByNameAndPass(username, password);
     if (name.isNotEmpty) {
       Navigate.toMainPage(context);
+    } else {
+      setState(() {
+        _textErrorLoginVisible = true;
+      });
+      _usernameFocusNode.requestFocus();
     }
   }
 
@@ -33,10 +40,14 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/logo.png", width: 250, height: 250),
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child:
+                      Image.asset("assets/logo.png", width: 200, height: 200)),
               SizedBox(height: 32.0),
               TextField(
                 controller: _usernameController,
+                focusNode: _usernameFocusNode,
                 decoration: InputDecoration(labelText: 'Username'),
               ),
               SizedBox(height: 16.0),
@@ -50,6 +61,10 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: onLogin,
                 child: Text('Login'),
               ),
+              SizedBox(height: 20.0),
+              if (_textErrorLoginVisible)
+                Text('Usuário ou Senha incorretos.',
+                    style: TextStyle(color: Colors.red))
             ],
           ),
         ),
