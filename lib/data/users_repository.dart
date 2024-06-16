@@ -33,4 +33,9 @@ class UsersRepository {
     data.remove('id');
     await db.insert('users', data);
   }
+
+  static delete(int id) {
+    DatabaseHelper db = DatabaseHelper();
+    db.delete('users', id);
+  }
 }

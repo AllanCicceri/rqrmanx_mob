@@ -44,6 +44,13 @@ class _UsersPageState extends State<UsersPage> {
               userList[index]['name'],
               style: Theme.of(context).textTheme.titleSmall,
             ),
+            trailing: IconButton(
+              onPressed: () {
+                UsersRepository.delete(userList[index]['id']);
+                _carregaDados();
+              },
+              icon: const Icon(Icons.delete),
+            ),
             onTap: () {
               // Ação ao clicar em um item da lista, se necessário
             },
